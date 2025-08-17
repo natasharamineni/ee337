@@ -1,0 +1,3 @@
+".\Objects\QUANTENC.obj" 
+TO ".\Objects\quant_enc" 
+PRINT(".\Listings\quant_enc.m51") RAMSIZE(256) 

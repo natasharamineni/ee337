@@ -1,0 +1,82 @@
+A51 MACRO ASSEMBLER  ADDSUB                                                               01/16/2023 22:26:34 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ADDSUB.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ADDSUB.asm SET(SMALL) DEBUG PRINT(.\Listings\ADDSUB.lst) OBJECT(.\Objec
+                      ts\ADDSUB.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 7961              5     MOV R1, #61H
+0102 3130              6     CALL MODADD
+0104 313C              7     CALL MODSUB
+0106 80FE              8     HERE: SJMP HERE
+0130                   9     ORG 130H
+                      10     
+0130                  11     MODADD:
+0130 E570             12     MOV A, 70H
+0132 AA71             13     MOV R2, 71H
+0134 89F0             14     MOV B, R1
+0136 2A               15     ADD A, R2
+0137 84               16     DIV AB
+0138 85F072           17     MOV 72H, B
+013B 22               18     RET
+                      19     
+013C                  20     MODSUB:
+013C E570             21     MOV A, 70H
+013E AA71             22     MOV R2, 71H
+0140 89F0             23     MOV B, R1
+0142 C3               24     CLR C
+0143 9A               25     SUBB A, R2
+0144 4005             26     JC HERE1
+0146 84               27     DIV AB
+0147 AAF0             28     MOV R2, B
+0149 500D             29     JNC HERE2
+014B E571             30     HERE1: MOV A, 71H
+014D AA70             31     MOV R2, 70H
+014F C3               32     CLR C
+0150 9A               33     SUBB A, R2
+0151 84               34     DIV AB
+0152 AAF0             35     MOV R2, B
+0154 E9               36     MOV A, R1
+0155 C3               37     CLR C
+0156 9A               38     SUBB A, R2
+0157 FA               39     MOV R2, A
+0158 8A73             40     HERE2: MOV 73H, R2
+015A 22               41     RET 
+                      42     
+                      43     END
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  ADDSUB                                                               01/16/2023 22:26:34 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0106H   A   
+HERE1. . . . . . .  C ADDR   014BH   A   
+HERE2. . . . . . .  C ADDR   0158H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MODADD . . . . . .  C ADDR   0130H   A   
+MODSUB . . . . . .  C ADDR   013CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

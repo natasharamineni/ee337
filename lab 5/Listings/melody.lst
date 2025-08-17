@@ -1,0 +1,138 @@
+A51 MACRO ASSEMBLER  MELODY                                                               02/07/2023 12:53:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\melody.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE melody.asm SET(SMALL) DEBUG PRINT(.\Listings\melody.lst) OBJECT(.\Objec
+                      ts\melody.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     ACALL TAKEINP
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8             
+0130                   9     TAKEINP:
+0130 758000           10     MOV P0, #0
+0133 75900F           11     MOV P1, #0FH
+0136                  12     INF:
+0136 E590             13     MOV A, P1
+0138 B40102           14     CJNE A, #01H, RE
+013B 8015             15     JMP SA
+013D                  16     RE:
+013D E590             17     MOV A, P1
+013F B40302           18     CJNE A, #03H, GA
+0142 8014             19     JMP RE1
+0144                  20     GA:
+0144 E590             21     MOV A, P1
+0146 B40702           22     CJNE A, #07H, MA
+0149 8013             23     JMP GA1
+014B                  24     MA:
+014B E590             25     MOV A, P1
+014D B40FE6           26     CJNE A, #0FH, INF
+0150 8012             27     JMP MA1
+                      28     
+0152 B287             29     SA: CPL P0.7
+0154 316D             30     ACALL DELAYSA
+0156 80DE             31     JMP INF
+                      32     
+0158 B287             33     RE1:CPL P0.7
+015A 3178             34     ACALL DELAYRE
+015C 80D8             35     JMP INF
+                      36     
+015E B287             37     GA1:CPL P0.7
+0160 3183             38     ACALL DELAYGA
+0162 80D2             39     JMP INF
+                      40     
+0164 B287             41     MA1:CPL P0.7
+0166 318E             42     ACALL DELAYMA
+0168 80CC             43     JMP INF
+                      44     
+016A 3130             45     ACALL TAKEINP
+016C 22               46     RET
+                      47     
+016D                  48     DELAYSA:
+016D C000             49     PUSH 00H
+016F 7A13             50     MOV R2, #19
+0171 3199             51     H4: ACALL delay_100us
+0173 DAFC             52     DJNZ R2, H4
+0175 D000             53     POP 00H
+0177 22               54     RET
+                      55     
+0178                  56     DELAYRE:
+0178 C000             57     PUSH 00H
+A51 MACRO ASSEMBLER  MELODY                                                               02/07/2023 12:53:15 PAGE     2
+
+017A 7A11             58     MOV R2, #17
+017C 3199             59     H5: ACALL delay_100us
+017E DAFC             60     DJNZ R2, H5
+0180 D000             61     POP 00H
+0182 22               62     RET
+                      63     
+0183                  64     DELAYGA:
+0183 C000             65     PUSH 00H
+0185 7A0F             66     MOV R2, #15
+0187 3199             67     H6: ACALL delay_100us
+0189 DAFC             68     DJNZ R2, H6
+018B D000             69     POP 00H
+018D 22               70     RET
+                      71     
+018E                  72     DELAYMA:
+018E C000             73     PUSH 00H
+0190 7A0E             74     MOV R2, #14
+0192 3199             75     H3: ACALL delay_100us
+0194 DAFC             76     DJNZ R2, H3
+0196 D000             77     POP 00H
+0198 22               78     RET
+                      79     
+0199                  80     delay_100us:
+0199 C000             81     push 00h
+019B 795E             82     mov r1, #94
+019D D9FE             83     h1: djnz r1, h1
+019F D000             84     pop 00h
+01A1 22               85     ret
+                      86     
+                      87     END
+                             
+                             
+A51 MACRO ASSEMBLER  MELODY                                                               02/07/2023 12:53:15 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAYGA. . . . . .  C ADDR   0183H   A   
+DELAYMA. . . . . .  C ADDR   018EH   A   
+DELAYRE. . . . . .  C ADDR   0178H   A   
+DELAYSA. . . . . .  C ADDR   016DH   A   
+DELAY_100US. . . .  C ADDR   0199H   A   
+GA . . . . . . . .  C ADDR   0144H   A   
+GA1. . . . . . . .  C ADDR   015EH   A   
+H1 . . . . . . . .  C ADDR   019DH   A   
+H3 . . . . . . . .  C ADDR   0192H   A   
+H4 . . . . . . . .  C ADDR   0171H   A   
+H5 . . . . . . . .  C ADDR   017CH   A   
+H6 . . . . . . . .  C ADDR   0187H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+INF. . . . . . . .  C ADDR   0136H   A   
+MA . . . . . . . .  C ADDR   014BH   A   
+MA1. . . . . . . .  C ADDR   0164H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RE . . . . . . . .  C ADDR   013DH   A   
+RE1. . . . . . . .  C ADDR   0158H   A   
+SA . . . . . . . .  C ADDR   0152H   A   
+TAKEINP. . . . . .  C ADDR   0130H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,73 @@
+A51 MACRO ASSEMBLER  BUBBLESORT                                                           01/17/2023 14:09:01 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\bubblesort.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE bubblesort.asm SET(SMALL) DEBUG PRINT(.\Listings\bubblesort.lst) OBJECT
+                      (.\Objects\bubblesort.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN: 
+0100 3130              5     CALL SORT
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+0130                   9     SORT:
+0130 7860             10     MOV R0, #60H             
+0132 7970             11     MOV R1, #70H
+0134 7F08             12     MOV R7, #08H
+0136                  13     LOOP1:
+0136 E6               14     MOV A, @R0
+0137 F7               15     MOV @R1, A
+0138 08               16     INC R0
+0139 09               17     INC R1
+013A DFFA             18     DJNZ R7, LOOP1
+                      19     
+013C 7E07             20     MOV R6, #7               
+013E 7870             21     LOOP3: MOV R0, #70H
+0140 AA06             22     MOV R2, 06H
+0142 E6               23     LOOP2: MOV A, @R0   
+0143 08               24     INC R0
+0144 FB               25     MOV R3, A  
+0145 C3               26     CLR C
+0146 96               27     SUBB A, @R0  
+0147 4006             28     JC NEXT  
+0149 E6               29     MOV A, @R0  
+014A 18               30     DEC R0  
+014B F6               31     MOV @R0, A  
+014C 08               32     INC R0  
+014D EB               33     MOV A, R3  
+014E F6               34     MOV @R0, A  
+014F DAF1             35     NEXT: DJNZ R2, LOOP2  
+0151 DEEB             36     DJNZ R6, LOOP3
+                      37     
+0153 22               38     RET
+                      39     
+                      40     END
+                             
+                             
+A51 MACRO ASSEMBLER  BUBBLESORT                                                           01/17/2023 14:09:01 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0102H   A   
+LOOP1. . . . . . .  C ADDR   0136H   A   
+LOOP2. . . . . . .  C ADDR   0142H   A   
+LOOP3. . . . . . .  C ADDR   013EH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXT . . . . . . .  C ADDR   014FH   A   
+SORT . . . . . . .  C ADDR   0130H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

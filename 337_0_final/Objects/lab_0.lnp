@@ -1,0 +1,3 @@
+".\Objects\PORTSQ.obj" 
+TO ".\Objects\lab_0" 
+PRINT(".\Listings\lab_0.m51") RAMSIZE(256) 
