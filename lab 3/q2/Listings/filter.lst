@@ -1,0 +1,59 @@
+A51 MACRO ASSEMBLER  FILTER                                                               01/24/2023 14:20:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\filter.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE filter.asm SET(SMALL) DEBUG PRINT(.\Listings\filter.lst) OBJECT(.\Objec
+                      ts\filter.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     CALL FILT
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+0130                   9     FILT:
+0130 7860             10     MOV R0, #60H
+0132 7970             11     MOV R1, #70H
+0134 7B08             12     MOV R3, #08H
+0136 E8               13     NEXT: MOV A, R0
+0137 FA               14     MOV R2, A
+0138 E6               15     MOV A, @R0
+0139 7C03             16     MOV R4, #03H
+013B 18               17     LOOP: DEC R0
+013C 26               18     ADD A, @R0
+013D DCFC             19     DJNZ R4, LOOP
+013F 75F004           20     MOV B, #04H
+0142 84               21     DIV AB
+0143 F7               22     MOV @R1, A
+0144 EA               23     MOV A, R2
+0145 F8               24     MOV R0, A
+0146 08               25     INC R0
+0147 09               26     INC R1
+0148 DBEC             27     DJNZ R3, NEXT
+014A 22               28     RET
+                      29     END
+A51 MACRO ASSEMBLER  FILTER                                                               01/24/2023 14:20:09 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+FILT . . . . . . .  C ADDR   0130H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+LOOP . . . . . . .  C ADDR   013BH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXT . . . . . . .  C ADDR   0136H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

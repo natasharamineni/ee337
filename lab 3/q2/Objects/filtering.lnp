@@ -1,0 +1,3 @@
+".\Objects\filter.obj" 
+TO ".\Objects\filtering" 
+PRINT(".\Listings\filtering.m51") RAMSIZE(256) 

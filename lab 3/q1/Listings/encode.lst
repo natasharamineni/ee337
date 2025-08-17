@@ -1,0 +1,68 @@
+A51 MACRO ASSEMBLER  ENCODE                                                               01/23/2023 17:04:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\encode.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE encode.asm SET(SMALL) DEBUG PRINT(.\Listings\encode.lst) OBJECT(.\Objec
+                      ts\encode.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     CALL QUANT
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+0130                   9     QUANT:
+0130 7860             10     MOV R0, #60H
+0132 7970             11     MOV R1, #70H
+0134 7A08             12     MOV R2, #8
+0136 E6               13     LOOP: MOV A, @R0
+0137 C3               14     CLR C
+0138 941E             15     SUBB A, #1EH
+013A 5018             16     JNC OP1
+013C E6               17     MOV A, @R0
+013D C3               18     CLR C
+013E 9414             19     SUBB A, #14H
+0140 500E             20     JNC OP2
+0142 E6               21     MOV A, @R0
+0143 C3               22     CLR C
+0144 940A             23     SUBB A, #0AH
+0146 5004             24     JNC OP3
+0148 7705             25     MOV @R1, #05H
+014A 800A             26     SJMP NEXT
+014C 770F             27     OP3: MOV @R1, #0FH
+014E 8006             28     SJMP NEXT
+0150 7719             29     OP2: MOV @R1, #19H
+0152 8002             30     SJMP NEXT
+0154 7723             31     OP1: MOV @R1, #23H
+0156 08               32     NEXT: INC R0
+0157 09               33     INC R1
+0158 DADC             34     DJNZ R2, LOOP
+015A 22               35     RET
+                      36     END
+A51 MACRO ASSEMBLER  ENCODE                                                               01/23/2023 17:04:12 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0102H   A   
+LOOP . . . . . . .  C ADDR   0136H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXT . . . . . . .  C ADDR   0156H   A   
+OP1. . . . . . . .  C ADDR   0154H   A   
+OP2. . . . . . . .  C ADDR   0150H   A   
+OP3. . . . . . . .  C ADDR   014CH   A   
+QUANT. . . . . . .  C ADDR   0130H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
