@@ -1,0 +1,77 @@
+C51 COMPILER V9.60.7.0   STOPWATCH                                                         03/14/2023 15:41:51 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE STOPWATCH
+OBJECT MODULE PLACED IN .\Objects\stopwatch.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE stopwatch.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\stopwatch.lst) TABS(2) OBJECT(.\Objects\stopwatch.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include "lcd.h"
+   3          
+   4          sbit AFG=P3^4;
+   5          sbit DIP=P1^0;
+   6          int seconds=0, second, minutes;
+   7          unsigned char min, sec, time[5]="00:00";
+   8          
+   9          void timer0_isr () interrupt 1
+  10          {
+  11   1        seconds = seconds + 1;
+  12   1        second = seconds % 60;
+  13   1          minutes = seconds/60;
+  14   1          time[4] = second%10 + '0';
+  15   1          time[3] = second/10 + '0';
+  16   1          time[2] = ':';
+  17   1          time[1] = minutes%10 + '0';
+  18   1          time[0] = minutes/10 + '0';
+  19   1        TH0 = 0xFF;
+  20   1        TL0 = 0xC4;
+  21   1        AFG=DIP=1;
+  22   1        TR0 = 1;
+  23   1      }
+  24          
+  25          void main()
+  26          {
+  27   1        lcd_init();
+  28   1        lcd_cmd(0x80);
+  29   1        msdelay(4);
+  30   1        lcd_write_string("00:00");
+  31   1        AFG=DIP=1;
+  32   1        while(1){
+  33   2        while(DIP==0){AFG=DIP=1;}
+  34   2        TMOD = 0x05;
+  35   2        TH0 = 0xFF;
+  36   2        TL0 = 0xC4;
+  37   2        ET0 = 1;
+  38   2        EA = 1;
+  39   2      
+  40   2        while(DIP==1)
+  41   2        {
+  42   3          TR0 = 1;
+  43   3          lcd_cmd(0x80);
+  44   3          msdelay(4);
+  45   3          lcd_write_string(time);
+  46   3          AFG=DIP=1;
+  47   3        }
+  48   2        TR0 = 0;
+  49   2      }
+  50   1        
+  51   1      }   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.60.7.0   STOPWATCH                                                         03/14/2023 15:41:51 PAGE 2   
+
+   CODE SIZE        =    389    ----
+   CONSTANT SIZE    =      6    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
